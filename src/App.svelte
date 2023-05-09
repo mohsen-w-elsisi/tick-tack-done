@@ -2,15 +2,9 @@
   import loadStateFromStorage from "./lib/loadStateFromStorage";
   import startAutoSaving from "./lib/startAutoSaving";
   import { tasks } from "./state";
-  import type { Task } from "./types";
 
   loadStateFromStorage();
   startAutoSaving();
-
-  function removeMe(taskI: Task) {
-    return () =>
-      tasks.update((tasksV) => tasksV.filter((v) => v.title != taskI.title));
-  }
 </script>
 
 <header>
