@@ -1,32 +1,14 @@
 <script lang="ts">
   import loadStateFromStorage from "./lib/loadStateFromStorage";
   import startAutoSaving from "./lib/startAutoSaving";
-  import { tasks } from "./state";
+
+  import Header from "./components/Header.svelte";
+  import MenuButton from "./components/MenuButton.svelte";
+  import Router from "svelte-spa-router";
+  import routes from "./routes";
 
   loadStateFromStorage();
   startAutoSaving();
 </script>
 
-<header>
-  <span>{$tasks.length} tasks for today</span>
-</header>
-
-<style>
-  header {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-
-    height: 4rem;
-
-    background-color: blue;
-
-    font-size: 2rem;
-
-    padding: 1rem;
-
-    display: flex;
-    align-items: center;
-  }
-</style>
+<Router routes={routes} />
