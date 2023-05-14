@@ -4,7 +4,7 @@
 
   import Router from "svelte-spa-router";
   import routes from "./routes";
-
+  
   loadStateFromStorage();
   startAutoSaving();
 </script>

@@ -4,8 +4,9 @@ import type { Task, TaskRaw } from "../types";
 export default function loadStateFromStorage() {
   const taskJson = readJsonFromStorage();
   const parsedTasks = parseTasksJson(taskJson);
+  const notCompletedTasks = filterCompletedTasks(parsedTasks);
 
-  tasks.set(parsedTasks);
+  tasks.set(notCompletedTasks);
 }
 
 function readJsonFromStorage(): TaskRaw[] | null {
@@ -32,4 +33,8 @@ function convertTaskRawToTask({
     discribtion,
     completed,
   };
+}
+
+function filterCompletedTasks(tasks: Task[]) {
+  return tasks.filter((task) => !task.completed);
 }
