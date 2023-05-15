@@ -3,6 +3,7 @@ export interface TaskRaw {
   date: string;
   discribtion?: string;
   completed: boolean;
+  todoList: string;
 }
 
 export interface Task {
@@ -10,4 +11,5 @@ export interface Task {
   date: Date;
   discribtion?: string;
   completed: boolean;
+  todoList: string;
 }

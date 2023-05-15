@@ -12,16 +12,9 @@ export default function startAutoSaving() {
   });
 }
 
-function convertTaskToTaskRaw({
-  title,
-  date,
-  discribtion,
-  completed,
-}: Task): TaskRaw {
+function convertTaskToTaskRaw(task: Task): TaskRaw {
   return {
-    title,
-    date: date.toUTCString(),
-    discribtion,
-    completed,
+    ...task,
+    date: task.date.toUTCString(),
   };
 }

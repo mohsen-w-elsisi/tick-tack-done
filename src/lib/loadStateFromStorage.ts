@@ -21,17 +21,10 @@ function parseTasksJson(taskJson: TaskRaw[]) {
   return taskJson ? taskJson.map(convertTaskRawToTask) : [];
 }
 
-function convertTaskRawToTask({
-  title,
-  date,
-  discribtion,
-  completed,
-}: TaskRaw): Task {
+function convertTaskRawToTask(rawTask: TaskRaw): Task {
   return {
-    title,
-    date: new Date(date),
-    discribtion,
-    completed,
+    ...rawTask,
+    date: new Date(rawTask.date),
   };
 }
 
