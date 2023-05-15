@@ -6,3 +6,7 @@ path {
     stroke: white;
     fill: white;
 }
+
+textarea {
+    @apply resize-none h-auto;
+}

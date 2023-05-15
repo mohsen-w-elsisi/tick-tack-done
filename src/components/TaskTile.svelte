@@ -13,6 +13,11 @@
       return tasks;
     });
   }
+
+  function toggleCompletionState() {
+    task.completed = !task.completed;
+    saveTaskChanges();
+  }
 </script>
 
 <li class="shadow-md p-1">
@@ -23,7 +28,7 @@
       bind:checked={task.completed}
       on:change={saveTaskChanges}
     />
-    <h2 class:line-through={task.completed} >{task.title}</h2>
+    <h2 class:line-through={task.completed}>{task.title}</h2>
   </label>
 </li>
 
@@ -32,16 +37,25 @@
 <div class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
     <form class="form-control gap-1" on:change={saveTaskChanges}>
-      <textarea class="textarea w-full" bind:value={task.title} />
+      <textarea class="textarea w-full" rows="2" bind:value={task.title} />
       <textarea
         class="textarea"
         placeholder="details"
+        rows="5"
         bind:value={task.discribtion}
       />
     </form>
 
     <div class="modal-action">
-      <label for={modalID} class="btn btn-primary">done</label>
+      <button on:click={toggleCompletionState}>
+        <label for={modalID} class="btn">
+          mark {task.completed ? "not done" : "done" }
+        </label>
+      </button>
+
+      <button>
+        <label for={modalID} class="btn btn-primary">close</label>
+      </button>
     </div>
   </div>
 </div>
