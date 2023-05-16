@@ -1,37 +1,56 @@
 <script lang="ts">
-  import { tasks } from "../state";
+  import { availableTodoLists, tasks } from "../state";
   import type { Task } from "../types";
+  import TaskDataEditInterface from "./TaskDataEditInterface.svelte";
 
-  const newTask: Task = {
+  let newTask: Task = {
     title: "",
     discribtion: "",
     date: new Date(Date.now()),
     completed: false,
+    todoList: "misc",
   };
+
+  let shouldCreateNewList = false;
+
+  $: shouldCreateNewList = shouldCreateNewList || newTask.todoList == "";
+
+  let ModalIsShown = false;
+
+  $: if (!ModalIsShown) {
+    newTask = {
+      title: "",
+      discribtion: "",
+      date: new Date(Date.now()),
+      completed: false,
+      todoList: "misc",
+    };
+
+    shouldCreateNewList = false;
+  }
 
   function addNewTask() {
     tasks.update((tasks) => [...tasks, newTask]);
+
+    if (shouldCreateNewList) {
+      availableTodoLists.update((todolists) => [
+        ...todolists,
+        newTask.todoList,
+      ]);
+    }
   }
 </script>
 
-<input type="checkbox" id="add-task-modal" class="modal-toggle" />
+<input
+  type="checkbox"
+  id="add-task-modal"
+  class="modal-toggle"
+  bind:checked={ModalIsShown}
+/>
 
 <div class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <form class="form-control gap-1">
-      <textarea
-        class="textarea w-full"
-        placeholder="title"
-        rows="2"
-        bind:value={newTask.title}
-      />
-      <textarea
-        class="textarea"
-        placeholder="details"
-        rows="5"
-        bind:value={newTask.discribtion}
-      />
-    </form>
+    <TaskDataEditInterface bind:task={newTask} bind:shouldCreateNewList />
 
     <div class="modal-action">
       <label for="add-task-modal" class="btn">cancel</label>
