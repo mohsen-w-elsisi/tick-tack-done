@@ -1,5 +1,10 @@
-import { tasks, availableTodoLists } from "../state";
+import { tasks, availableTodoLists, relevantDates } from "../state";
 import type { Task, TaskRaw } from "../types";
+import {
+  removeTimeFromDate,
+  representitiveValueOf,
+  sortDates,
+} from "./dateUtils";
 
 export default function loadStateFromStorage() {
   const taskJson = readJsonFromStorage();
@@ -9,8 +14,10 @@ export default function loadStateFromStorage() {
   tasks.set(notCompletedTasks);
 
   const todoListsInTasks = findExistingTodoListsIn(notCompletedTasks);
-
   availableTodoLists.set(todoListsInTasks);
+
+  const datesInTasks = findExistingDatesIn(notCompletedTasks);
+  relevantDates.set(datesInTasks);
 }
 
 function readJsonFromStorage(): TaskRaw[] | null {
@@ -48,4 +55,24 @@ function findExistingTodoListsIn(tasks: Task[]) {
   }
 
   return todoListsInTasksNoDuplicates;
+}
+
+function findExistingDatesIn(tasks: Task[]) {
+  const datesInTasks = tasks.map((task) => task.date).map(removeTimeFromDate);
+
+  const DatesInTasksNoDuplicates: Date[] = [];
+
+  for (const date of datesInTasks) {
+    if (
+      ! DatesInTasksNoDuplicates.map(representitiveValueOf).includes(
+        representitiveValueOf(date)
+      )
+    ) {
+      DatesInTasksNoDuplicates.push(date);
+    }
+  }
+
+  console.log(DatesInTasksNoDuplicates);
+
+  return sortDates(DatesInTasksNoDuplicates);
 }

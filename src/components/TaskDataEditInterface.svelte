@@ -1,10 +1,8 @@
 <script lang="ts">
   import type { Task } from "../types";
-
   import TodoListSelector from "./TodoListSelector.svelte";
 
   export let task: Task;
-  export let shouldCreateNewList = false;
 
   export let onchange = () => null;
 </script>
@@ -24,8 +22,10 @@
     bind:value={task.discribtion}
   />
 
-  <TodoListSelector
-    bind:shouldCreateNewList
-    bind:selectedList={task.todoList}
+  <TodoListSelector bind:selectedList={task.todoList} />
+
+  <input
+    type="date"
+    on:change={(e) => (task.date = e.currentTarget.valueAsDate)}
   />
 </form>
