@@ -10,3 +10,7 @@ path {
 textarea {
     @apply resize-none h-auto;
 }
+
+.modal-action .btn-sm {
+    @apply sm:btn-md;
+}

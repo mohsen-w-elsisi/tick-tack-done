@@ -17,13 +17,13 @@
     
     <div class="modal-action">
       <button on:click={toggleCompletionState}>
-        <label for={modalID} class="btn">
+        <label for={modalID} class="btn btn-sm">
           mark {task.completed ? "not done" : "done"}
         </label>
       </button>
 
       <button>
-        <label for={modalID} class="btn btn-primary">close</label>
+        <label for={modalID} class="btn btn-sm btn-primary">close</label>
       </button>
     </div>
   </div>

@@ -7,18 +7,18 @@
   export let onchange = () => null;
 </script>
 
-<form class="form-control gap-1" on:change={onchange}>
-  <textarea
-    class="textarea w-full"
+<form class="form-control gap-2" on:change={onchange}>
+  <input
+    type="text"
+    class="input input-lg w-full px-4 h-auto py-1"
     placeholder="title"
-    rows="2"
     bind:value={task.title}
   />
 
   <textarea
     class="textarea"
     placeholder="details"
-    rows="5"
+    rows="3"
     bind:value={task.discribtion}
   />
 

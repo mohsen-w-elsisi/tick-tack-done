@@ -40,10 +40,10 @@
     <TaskDataEditInterface bind:task={newTask} />
 
     <div class="modal-action">
-      <label for="add-task-modal" class="btn">cancel</label>
+      <label for="add-task-modal" class="btn btn-sm">cancel</label>
 
       <button on:click={addNewTask}>
-        <label for="add-task-modal" class="btn btn-primary">add task</label>
+        <label for="add-task-modal" class="btn btn-sm btn-primary">add task</label>
       </button>
     </div>
   </div>
