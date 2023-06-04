@@ -1,19 +1,17 @@
 <script>
-  import { dateHasPassed, toVisualText } from "../lib/dateUtils";
-  import { tasks, relevantDates } from "../state";
+  import { dateHasPassed } from "../lib/dateUtils";
+  import { thereIsOverdueTasks } from "../state";
+  import { relevantDates } from "../state";
+  import OverdueTasks from "./OverdueTasks.svelte";
 
   import SchedualViewHeading from "./SchedualViewHeading.svelte";
-  import TaskTile from "./TaskTile.svelte";
   import TasksWithDate from "./TasksWithDate.svelte";
 </script>
 
 <main class="menu p-2 sm:px-6">
-  <SchedualViewHeading overdue />
-  {#each $tasks as task, i}
-    {#if dateHasPassed(task.date)}
-      <TaskTile {task} taskIndex={i} />
-    {/if}
-  {/each}
+  {#if $thereIsOverdueTasks}
+    <OverdueTasks />
+  {/if}
 
   {#each $relevantDates as date}
     {#if !dateHasPassed(date)}
